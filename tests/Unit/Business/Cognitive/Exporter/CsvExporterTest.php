@@ -50,6 +50,8 @@ class CsvExporterTest extends TestCase
             'ifCount' => 4,
             'ifNestingLevel' => 2,
             'elseCount' => 1,
+            'loopCount' => 0,
+            'nestingLevel' => 1,
             'lineCountWeight' => 0.5,
             'argCountWeight' => 0.3,
             'returnCountWeight' => 0.2,
@@ -58,6 +60,8 @@ class CsvExporterTest extends TestCase
             'ifCountWeight' => 0.6,
             'ifNestingLevelWeight' => 0.5,
             'elseCountWeight' => 0.2,
+            'loopCountWeight' => 0.0,
+            'nestingLevelWeight' => 0.0,
         ]);
 
         $metricsCollection->add($metrics);
@@ -96,7 +100,13 @@ class CsvExporterTest extends TestCase
             18 => 'If Nesting Level Weight',
             19 => 'If Nesting Level Weight Delta',
             20 => 'Else Count',
-            21 => 'Combined Cognitive Complexity'
+            21 => 'Loop Count',
+            22 => 'Loop Count Weight',
+            23 => 'Loop Count Weight Delta',
+            24 => 'Nesting Level',
+            25 => 'Nesting Level Weight',
+            26 => 'Nesting Level Weight Delta',
+            27 => 'Combined Cognitive Complexity'
         ], $header);
 
         $data = fgetcsv(
@@ -125,9 +135,13 @@ class CsvExporterTest extends TestCase
             18 => '0.5',
             19 => '',
             20 => '1',
-            21 => '0.2',
-            22 => '',
-            23 => '0'
+            21 => '0',
+            22 => '0',
+            23 => '',
+            24 => '1',
+            25 => '0',
+            26 => '',
+            27 => '0'
         ], $data);
 
         fclose($file);

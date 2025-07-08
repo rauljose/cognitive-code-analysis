@@ -52,6 +52,8 @@ class HtmlExporterTest extends TestCase
             'ifCount' => 4,
             'ifNestingLevel' => 2,
             'elseCount' => 1,
+            'loopCount' => 0,
+            'nestingLevel' => 1,
             'lineCountWeight' => 0.5,
             'argCountWeight' => 0.3,
             'returnCountWeight' => 0.2,
@@ -60,6 +62,8 @@ class HtmlExporterTest extends TestCase
             'ifCountWeight' => 0.6,
             'ifNestingLevelWeight' => 0.5,
             'elseCountWeight' => 0.2,
+            'loopCountWeight' => 0.0,
+            'nestingLevelWeight' => 0.0,
         ]);
 
         $metricsCollection->add($metrics);

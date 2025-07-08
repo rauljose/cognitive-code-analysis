@@ -67,6 +67,16 @@ class ConfigLoader implements ConfigurationInterface
                 self::SCALE => 1.0,
                 self::ENABLED => true
             ],
+            MetricNames::LOOP_COUNT->value => [
+                self::THRESHOLD => 1,
+                self::SCALE => 1.0,
+                self::ENABLED => true
+            ],
+            MetricNames::NESTING_LEVEL->value => [
+                self::THRESHOLD => 1,
+                self::SCALE => 1.0,
+                self::ENABLED => true
+            ],
         ];
     }
 

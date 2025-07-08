@@ -24,6 +24,8 @@ class HtmlExporter implements DataExporterInterface
         'If Count',
         'If Nesting Level',
         'Else Count',
+        'Loop Count',
+        'Nesting Level',
         'Return Count',
         'Variable Count',
         'Property Call Count',
@@ -117,6 +119,8 @@ class HtmlExporter implements DataExporterInterface
                             <?php echo $this->generateMetricRow($data->getIfCount(), $data->getIfCountWeight(), $data->getIfCountWeightDelta()); ?>
                             <?php echo $this->generateMetricRow($data->getIfNestingLevel(), $data->getIfNestingLevelWeight(), $data->getIfNestingLevelWeightDelta()); ?>
                             <?php echo $this->generateMetricRow($data->getElseCount(), $data->getElseCountWeight(), $data->getElseCountWeightDelta()); ?>
+                            <?php echo $this->generateMetricRow($data->getLoopCount(), $data->getLoopCountWeight(), $data->getLoopCountWeightDelta()); ?>
+                            <?php echo $this->generateMetricRow($data->getNestingLevel(), $data->getNestingLevelWeight(), $data->getNestingLevelWeightDelta()); ?>
                             <?php echo $this->generateMetricRow($data->getReturnCount(), $data->getReturnCountWeight(), $data->getReturnCountWeightDelta()); ?>
                             <?php echo $this->generateMetricRow($data->getVariableCount(), $data->getVariableCountWeight(), $data->getVariableCountWeightDelta()); ?>
                             <?php echo $this->generateMetricRow($data->getPropertyCallCount(), $data->getPropertyCallCountWeight(), $data->getPropertyCallCountWeightDelta()); ?>

@@ -93,6 +93,8 @@ class CognitiveMetricTextRenderer
             "If",
             "If Nesting\nLevel",
             "Else",
+            "Loops",
+            "Nesting\nLevel",
             "Cognitive\nComplexity"
         ];
     }
@@ -143,6 +145,8 @@ class CognitiveMetricTextRenderer
             'ifCount',
             'ifNestingLevel',
             'elseCount',
+            'loopCount',
+            'nestingLevel',
         ];
     }
 
@@ -162,6 +166,8 @@ class CognitiveMetricTextRenderer
             'ifCount' => $metrics->getIfCount(),
             'ifNestingLevel' => $metrics->getIfNestingLevel(),
             'elseCount' => $metrics->getElseCount(),
+            'loopCount' => $metrics->getLoopCount(),
+            'nestingLevel' => $metrics->getNestingLevel(),
             'score' => $metrics->getScore() > 0.5
                 ? '<error>' . $metrics->getScore() . '</error>'
                 : '<info>' . $metrics->getScore() . '</info>',

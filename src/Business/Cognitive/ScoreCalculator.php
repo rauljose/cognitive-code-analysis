@@ -23,6 +23,8 @@ class ScoreCalculator
         'ifCount',
         'ifNestingLevel',
         'elseCount',
+        'loopCount',
+        'nestingLevel',
     ];
 
     /**
@@ -37,6 +39,8 @@ class ScoreCalculator
         'IfNestingLevel' => 'ifNestingLevel',
         'PropertyCallCount' => 'propertyCallCount',
         'ElseCount' => 'elseCount',
+        'LoopCount' => 'loopCount',
+        'NestingLevel' => 'nestingLevel',
     ];
 
     /**

@@ -35,6 +35,8 @@ class ScoreCalculatorTest extends TestCase
             'ifCount' => 3,
             'ifNestingLevel' => 2,
             'elseCount' => 2,
+            'loopCount' => 0,
+            'nestingLevel' => 1,
         ]);
     }
 

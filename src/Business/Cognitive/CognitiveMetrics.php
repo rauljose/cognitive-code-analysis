@@ -24,6 +24,8 @@ class CognitiveMetrics implements JsonSerializable
         'ifCount' => 'ifCount',
         'ifNestingLevel' => 'ifNestingLevel',
         'elseCount' => 'elseCount',
+        'loopCount' => 'loopCount',
+        'nestingLevel' => 'nestingLevel',
     ];
 
     private string $class;
@@ -39,6 +41,8 @@ class CognitiveMetrics implements JsonSerializable
     private int $ifCount = 0;
     private int $ifNestingLevel = 0;
     private int $elseCount = 0;
+    private int $loopCount = 0;
+    private int $nestingLevel = 0;
 
     private float $lineCountWeight = 0.0;
     private float $argCountWeight = 0.0;
@@ -48,6 +52,8 @@ class CognitiveMetrics implements JsonSerializable
     private float $ifCountWeight = 0.0;
     private float $ifNestingLevelWeight = 0.0;
     private float $elseCountWeight = 0.0;
+    private float $loopCountWeight = 0.0;
+    private float $nestingLevelWeight = 0.0;
     private float $score = 0.0;
 
     private ?Delta $lineCountWeightDelta = null;
@@ -58,6 +64,8 @@ class CognitiveMetrics implements JsonSerializable
     private ?Delta $ifCountWeightDelta = null;
     private ?Delta $ifNestingLevelWeightDelta = null;
     private ?Delta $elseCountWeightDelta = null;
+    private ?Delta $loopCountWeightDelta = null;
+    private ?Delta $nestingLevelWeightDelta = null;
 
     /**
      * @param array<string, mixed> $metrics
@@ -95,6 +103,8 @@ class CognitiveMetrics implements JsonSerializable
         $this->ifCount = $metrics['ifCount'];
         $this->ifNestingLevel = $metrics['ifNestingLevel'];
         $this->elseCount = $metrics['elseCount'];
+        $this->loopCount = $metrics['loopCount'];
+        $this->nestingLevel = $metrics['nestingLevel'];
     }
 
     /**
@@ -112,6 +122,8 @@ class CognitiveMetrics implements JsonSerializable
         $this->ifCountWeight = $metrics['ifCountWeight'] ?? 0.0;
         $this->ifNestingLevelWeight = $metrics['ifNestingLevelWeight'] ?? 0.0;
         $this->elseCountWeight = $metrics['elseCountWeight'] ?? 0.0;
+        $this->loopCountWeight = $metrics['loopCountWeight'] ?? 0.0;
+        $this->nestingLevelWeight = $metrics['nestingLevelWeight'] ?? 0.0;
     }
 
     public function setTimesChanged(int $timesChanged): void
@@ -149,6 +161,8 @@ class CognitiveMetrics implements JsonSerializable
         $this->ifCountWeightDelta = new Delta($other->getIfCountWeight(), $this->ifCountWeight);
         $this->ifNestingLevelWeightDelta = new Delta($other->getIfNestingLevelWeight(), $this->ifNestingLevelWeight);
         $this->elseCountWeightDelta = new Delta($other->getElseCountWeight(), $this->elseCountWeight);
+        $this->loopCountWeightDelta = new Delta($other->getLoopCountWeight(), $this->loopCountWeight);
+        $this->nestingLevelWeightDelta = new Delta($other->getNestingLevelWeight(), $this->nestingLevelWeight);
     }
 
     /**
@@ -220,6 +234,16 @@ class CognitiveMetrics implements JsonSerializable
     public function getElseCount(): int
     {
         return $this->elseCount;
+    }
+
+    public function getLoopCount(): int
+    {
+        return $this->loopCount;
+    }
+
+    public function getNestingLevel(): int
+    {
+        return $this->nestingLevel;
     }
 
     public function getLineCountWeight(): float
@@ -302,6 +326,26 @@ class CognitiveMetrics implements JsonSerializable
         $this->elseCountWeight = $weight;
     }
 
+    public function getLoopCountWeight(): float
+    {
+        return $this->loopCountWeight;
+    }
+
+    public function setLoopCountWeight(float $weight): void
+    {
+        $this->loopCountWeight = $weight;
+    }
+
+    public function getNestingLevelWeight(): float
+    {
+        return $this->nestingLevelWeight;
+    }
+
+    public function setNestingLevelWeight(float $weight): void
+    {
+        $this->nestingLevelWeight = $weight;
+    }
+
     public function setScore(float $score): void
     {
         $this->score = $score;
@@ -352,6 +396,16 @@ class CognitiveMetrics implements JsonSerializable
         return $this->elseCountWeightDelta;
     }
 
+    public function getLoopCountWeightDelta(): ?Delta
+    {
+        return $this->loopCountWeightDelta;
+    }
+
+    public function getNestingLevelWeightDelta(): ?Delta
+    {
+        return $this->nestingLevelWeightDelta;
+    }
+
     public function getTimesChanged(): int
     {
         return $this->timesChanged ?? 0;
@@ -385,6 +439,8 @@ class CognitiveMetrics implements JsonSerializable
             'ifCount' => $this->ifCount,
             'ifNestingLevel' => $this->ifNestingLevel,
             'elseCount' => $this->elseCount,
+            'loopCount' => $this->loopCount,
+            'nestingLevel' => $this->nestingLevel,
             'lineCountWeight' => $this->lineCountWeight,
             'argCountWeight' => $this->argCountWeight,
             'returnCountWeight' => $this->returnCountWeight,
@@ -393,6 +449,8 @@ class CognitiveMetrics implements JsonSerializable
             'ifCountWeight' => $this->ifCountWeight,
             'ifNestingLevelWeight' => $this->ifNestingLevelWeight,
             'elseCountWeight' => $this->elseCountWeight,
+            'loopCountWeight' => $this->loopCountWeight,
+            'nestingLevelWeight' => $this->nestingLevelWeight,
             'lineCountWeightDelta' => $this->lineCountWeightDelta,
             'argCountWeightDelta' => $this->argCountWeightDelta,
             'returnCountWeightDelta' => $this->returnCountWeightDelta,
@@ -401,6 +459,8 @@ class CognitiveMetrics implements JsonSerializable
             'ifCountWeightDelta' => $this->ifCountWeightDelta,
             'ifNestingLevelWeightDelta' => $this->ifNestingLevelWeightDelta,
             'elseCountWeightDelta' => $this->elseCountWeightDelta,
+            'loopCountWeightDelta' => $this->loopCountWeightDelta,
+            'nestingLevelWeightDelta' => $this->nestingLevelWeightDelta,
         ];
     }
 

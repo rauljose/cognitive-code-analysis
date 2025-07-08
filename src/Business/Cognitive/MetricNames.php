@@ -17,5 +17,7 @@ enum MetricNames: string
     case IF_COUNT = 'ifCount';
     case IF_NESTING_LEVEL = 'ifNestingLevel';
     case ELSE_COUNT = 'elseCount';
+    case LOOP_COUNT = 'loopCount';
+    case NESTING_LEVEL = 'nestingLevel';
     case TIMES_CHANGED = 'timesChanged';
 }

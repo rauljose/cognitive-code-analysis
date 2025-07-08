@@ -63,6 +63,8 @@ class CognitiveMetricsVisitorTest extends TestCase
         $this->assertEquals(1, $metrics['ifCount']);
         $this->assertEquals(1, $metrics['ifNestingLevel']);
         $this->assertEquals(2, $metrics['elseCount']);
+        $this->assertEquals(0, $metrics['loopCount']);
+        $this->assertEquals(1, $metrics['nestingLevel']);
     }
 
     public function testCountVariablesNotAlreadyTrackedAsArguments(): void
