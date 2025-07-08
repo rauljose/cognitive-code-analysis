@@ -43,6 +43,10 @@ class JsonExporter implements DataExporterInterface
                     'ifNestingLevelWeight' => $metrics->getIfNestingLevelWeight(),
                     'elseCount' => $metrics->getElseCount(),
                     'elseCountWeight' => $metrics->getElseCountWeight(),
+                    'loopCount' => $metrics->getLoopCount(),
+                    'loopCountWeight' => $metrics->getLoopCountWeight(),
+                    'nestingLevel' => $metrics->getNestingLevel(),
+                    'nestingLevelWeight' => $metrics->getNestingLevelWeight(),
                     'score' => $metrics->getScore()
                 ];
             }

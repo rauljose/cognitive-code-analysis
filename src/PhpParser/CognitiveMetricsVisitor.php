@@ -40,6 +40,9 @@ class CognitiveMetricsVisitor extends NodeVisitorAbstract
     private int $maxIfNestingLevel = 0;
     private int $elseCount = 0;
     private int $ifCount = 0;
+    private int $loopCount = 0;
+    private int $currentNestingLevel = 0;
+    private int $maxNestingLevel = 0;
 
     public function resetValues(): void
     {
@@ -52,6 +55,9 @@ class CognitiveMetricsVisitor extends NodeVisitorAbstract
         $this->maxIfNestingLevel = 0;
         $this->elseCount = 0;
         $this->ifCount = 0;
+        $this->loopCount = 0;
+        $this->currentNestingLevel = 0;
+        $this->maxNestingLevel = 0;
     }
 
     private function classMethodOnEnterNode(Node $node): void
@@ -105,6 +111,8 @@ class CognitiveMetricsVisitor extends NodeVisitorAbstract
             'ifNestingLevel' => 0,
             'elseCount' => 0,
             'ifCount' => 0,
+            'loopCount' => 0,
+            'nestingLevel' => 0,
         ];
     }
 
@@ -186,21 +194,26 @@ class CognitiveMetricsVisitor extends NodeVisitorAbstract
         $this->classMethodOnEnterNode($node);
 
         if ($this->currentMethod) {
+            $this->enterNestingNode($node);
             $this->gatherMetrics($node);
         }
     }
 
     private function gatherMetrics(Node $node): void
     {
-        match (true) {
-            $node instanceof Node\Stmt\Return_ => $this->incrementReturnCount(),
-            $node instanceof Node\Expr\Variable => $this->countVariablesNotAlreadyTrackedAsArguments($node),
-            $node instanceof Node\Expr\PropertyFetch => $this->trackPropertyFetch($node),
-            $node instanceof Node\Stmt\If_ => $this->trackIfStatement(),
-            $node instanceof Node\Stmt\Else_,
-            $node instanceof Node\Stmt\ElseIf_ => $this->incrementElseCount(),
-            default => null, // Do nothing for other node types
-        };
+        if ($node instanceof Node\Stmt\Return_) {
+            $this->incrementReturnCount();
+        } elseif ($node instanceof Node\Expr\Variable) {
+            $this->countVariablesNotAlreadyTrackedAsArguments($node);
+        } elseif ($node instanceof Node\Expr\PropertyFetch) {
+            $this->trackPropertyFetch($node);
+        } elseif ($node instanceof Node\Stmt\If_) {
+            $this->trackIfStatement();
+        } elseif ($node instanceof Node\Stmt\Else_ || $node instanceof Node\Stmt\ElseIf_) {
+            $this->incrementElseCount();
+        } elseif ($node instanceof Node\Stmt\For_ || $node instanceof Node\Stmt\Foreach_ || $node instanceof Node\Stmt\While_ || $node instanceof Node\Stmt\Do_) {
+            $this->trackLoopStatement();
+        }
     }
 
     private function incrementReturnCount(): void
@@ -262,6 +275,42 @@ class CognitiveMetricsVisitor extends NodeVisitorAbstract
         }
     }
 
+    private function trackLoopStatement(): void
+    {
+        $this->loopCount++;
+    }
+
+    private function enterNestingNode(Node $node): void
+    {
+        if ($this->isNestingNode($node)) {
+            $this->currentNestingLevel++;
+            if ($this->currentNestingLevel > $this->maxNestingLevel) {
+                $this->maxNestingLevel = $this->currentNestingLevel;
+            }
+        }
+    }
+
+    private function leaveNestingNode(Node $node): void
+    {
+        if ($this->isNestingNode($node)) {
+            $this->currentNestingLevel--;
+        }
+    }
+
+    private function isNestingNode(Node $node): bool
+    {
+        return $node instanceof Node\Stmt\If_
+            || $node instanceof Node\Stmt\Else_
+            || $node instanceof Node\Stmt\ElseIf_
+            || $node instanceof Node\Stmt\For_
+            || $node instanceof Node\Stmt\Foreach_
+            || $node instanceof Node\Stmt\While_
+            || $node instanceof Node\Stmt\Do_
+            || $node instanceof Node\Stmt\Switch_
+            || $node instanceof Node\Expr\Match_
+            || $node instanceof Node\Stmt\Catch_;
+    }
+
     private function incrementElseCount(): void
     {
         $this->elseCount++;
@@ -284,6 +333,8 @@ class CognitiveMetricsVisitor extends NodeVisitorAbstract
             $this->methodMetrics[$method]['ifCount'] = $this->ifCount;
             $this->methodMetrics[$method]['ifNestingLevel'] = $this->maxIfNestingLevel;
             $this->methodMetrics[$method]['elseCount'] = $this->elseCount;
+            $this->methodMetrics[$method]['loopCount'] = $this->loopCount;
+            $this->methodMetrics[$method]['nestingLevel'] = $this->maxNestingLevel;
             $this->methodMetrics[$method]['lineCount'] = $node->getEndLine() - $node->getStartLine() + 1;
             $this->methodMetrics[$method]['argCount'] = count($node->getParams());
             $this->currentMethod = '';
@@ -306,6 +357,9 @@ class CognitiveMetricsVisitor extends NodeVisitorAbstract
 
     public function leaveNode(Node $node): void
     {
+        if ($this->currentMethod) {
+            $this->leaveNestingNode($node);
+        }
         $this->checkNestingLevelOnLeaveNode($node);
         $this->writeMetricsOnLeaveNode($node);
         $this->checkNameSpaceOnLeaveNode($node);

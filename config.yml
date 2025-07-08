@@ -36,3 +36,11 @@ cognitive:
       threshold: 1
       scale: 1.0
       enabled: true
+    loopCount:
+      threshold: 1
+      scale: 1.0
+      enabled: true
+    nestingLevel:
+      threshold: 1
+      scale: 1.0
+      enabled: true

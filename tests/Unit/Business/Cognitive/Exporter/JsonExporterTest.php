@@ -34,6 +34,8 @@ class JsonExporterTest extends TestCase
             'ifCount' => 4,
             'ifNestingLevel' => 2,
             'elseCount' => 1,
+            'loopCount' => 0,
+            'nestingLevel' => 1,
         ]);
 
         $metrics2 = new CognitiveMetrics([
@@ -48,6 +50,8 @@ class JsonExporterTest extends TestCase
             'ifCount' => 4,
             'ifNestingLevel' => 2,
             'elseCount' => 1,
+            'loopCount' => 0,
+            'nestingLevel' => 1,
         ]);
 
         $metricsCollection->add($metrics1);
@@ -83,6 +87,10 @@ class JsonExporterTest extends TestCase
                         'ifNestingLevelWeight' => 0,
                         'elseCount' => 1,
                         'elseCountWeight' => 0,
+                        'loopCount' => 0,
+                        'loopCountWeight' => 0,
+                        'nestingLevel' => 1,
+                        'nestingLevelWeight' => 0,
                         'score' => 0,
                     ]
                 ]
@@ -108,6 +116,10 @@ class JsonExporterTest extends TestCase
                         'ifNestingLevelWeight' => 0,
                         'elseCount' => 1,
                         'elseCountWeight' => 0,
+                        'loopCount' => 0,
+                        'loopCountWeight' => 0,
+                        'nestingLevel' => 1,
+                        'nestingLevelWeight' => 0,
                         'score' => 0,
                     ]
                 ]

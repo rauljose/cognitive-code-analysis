@@ -37,7 +37,9 @@ class CognitiveMetricsCollectionTest extends TestCase
             'propertyCallCount' => 4,
             'ifCount' => 2,
             'ifNestingLevel' => 1,
-            'elseCount' => 0
+            'elseCount' => 0,
+            'loopCount' => 0,
+            'nestingLevel' => 1
         ]);
 
         $metrics2 = $this->createCognitiveMetrics([
@@ -51,7 +53,9 @@ class CognitiveMetricsCollectionTest extends TestCase
             'propertyCallCount' => 3,
             'ifCount' => 3,
             'ifNestingLevel' => 2,
-            'elseCount' => 1
+            'elseCount' => 1,
+            'loopCount' => 0,
+            'nestingLevel' => 1
         ]);
 
         $this->assertSame(0, $metricsCollection->count());
@@ -78,7 +82,9 @@ class CognitiveMetricsCollectionTest extends TestCase
             'propertyCallCount' => 4,
             'ifCount' => 2,
             'ifNestingLevel' => 1,
-            'elseCount' => 0
+            'elseCount' => 0,
+            'loopCount' => 0,
+            'nestingLevel' => 1
         ]);
 
         $metrics2 = $this->createCognitiveMetrics([
@@ -92,7 +98,9 @@ class CognitiveMetricsCollectionTest extends TestCase
             'propertyCallCount' => 3,
             'ifCount' => 3,
             'ifNestingLevel' => 2,
-            'elseCount' => 1
+            'elseCount' => 1,
+            'loopCount' => 0,
+            'nestingLevel' => 1
         ]);
 
         $metricsCollection->add($metrics1);
@@ -121,6 +129,8 @@ class CognitiveMetricsCollectionTest extends TestCase
             'ifCount' => 2,
             'ifNestingLevel' => 1,
             'elseCount' => 0,
+            'loopCount' => 0,
+            'nestingLevel' => 1,
             'score' => 5.0
         ]);
         $metrics1->setScore(5.0);
@@ -137,6 +147,8 @@ class CognitiveMetricsCollectionTest extends TestCase
             'ifCount' => 3,
             'ifNestingLevel' => 2,
             'elseCount' => 1,
+            'loopCount' => 0,
+            'nestingLevel' => 1,
             'score' => 10.0
         ]);
         $metrics2->setScore(10.0);
@@ -168,7 +180,9 @@ class CognitiveMetricsCollectionTest extends TestCase
             'propertyCallCount' => 4,
             'ifCount' => 2,
             'ifNestingLevel' => 1,
-            'elseCount' => 0
+            'elseCount' => 0,
+            'loopCount' => 0,
+            'nestingLevel' => 1
         ]);
 
         $metrics2 = $this->createCognitiveMetrics([
@@ -182,7 +196,9 @@ class CognitiveMetricsCollectionTest extends TestCase
             'propertyCallCount' => 3,
             'ifCount' => 3,
             'ifNestingLevel' => 2,
-            'elseCount' => 1
+            'elseCount' => 1,
+            'loopCount' => 0,
+            'nestingLevel' => 1
         ]);
 
         $metrics3 = $this->createCognitiveMetrics([
@@ -196,7 +212,9 @@ class CognitiveMetricsCollectionTest extends TestCase
             'propertyCallCount' => 7,
             'ifCount' => 4,
             'ifNestingLevel' => 3,
-            'elseCount' => 2
+            'elseCount' => 2,
+            'loopCount' => 0,
+            'nestingLevel' => 2
         ]);
 
         $metricsCollection->add($metrics1);

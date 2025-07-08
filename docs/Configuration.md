@@ -66,4 +66,10 @@ cognitive:
       elseCount:
         threshold: 1
         scale: 1.0
+      loopCount:
+        threshold: 1
+        scale: 1.0
+      nestingLevel:
+        threshold: 1
+        scale: 1.0
 ```

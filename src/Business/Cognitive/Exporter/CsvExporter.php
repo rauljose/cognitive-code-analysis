@@ -37,6 +37,12 @@ class CsvExporter implements DataExporterInterface
         'If Nesting Level Weight',
         'If Nesting Level Weight Delta',
         'Else Count',
+        'Loop Count',
+        'Loop Count Weight',
+        'Loop Count Weight Delta',
+        'Nesting Level',
+        'Nesting Level Weight',
+        'Nesting Level Weight Delta',
         'Combined Cognitive Complexity'
     ];
 
@@ -92,6 +98,14 @@ class CsvExporter implements DataExporterInterface
                     $data->getElseCount(),
                     $data->getElseCountWeight(),
                     (string)$data->getElseCountWeightDelta(),
+
+                    $data->getLoopCount(),
+                    $data->getLoopCountWeight(),
+                    (string)$data->getLoopCountWeightDelta(),
+
+                    $data->getNestingLevel(),
+                    $data->getNestingLevelWeight(),
+                    (string)$data->getNestingLevelWeightDelta(),
 
                     $data->getScore()
                 ], ',', '"', '\\');

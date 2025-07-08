@@ -32,6 +32,8 @@ class CognitiveMetricsTest extends TestCase
             'ifCount' => 4,
             'ifNestingLevel' => 2,
             'elseCount' => 1,
+            'loopCount' => 0,
+            'nestingLevel' => 1,
         ];
     }
 
@@ -50,6 +52,8 @@ class CognitiveMetricsTest extends TestCase
         $this->assertSame(4, $metrics->getIfCount());
         $this->assertSame(2, $metrics->getIfNestingLevel());
         $this->assertSame(1, $metrics->getElseCount());
+        $this->assertSame(0, $metrics->getLoopCount());
+        $this->assertSame(1, $metrics->getNestingLevel());
         $this->assertSame(0.0, $metrics->getLineCountWeight());
         $this->assertSame(0.0, $metrics->getArgCountWeight());
         $this->assertSame(0.0, $metrics->getReturnCountWeight());
@@ -102,6 +106,8 @@ class CognitiveMetricsTest extends TestCase
             'ifCount' => 4,
             'ifNestingLevel' => 2,
             'elseCount' => 1,
+            'loopCount' => 0,
+            'nestingLevel' => 1,
             'lineCountWeight' => 0.0,
             'argCountWeight' => 0.0,
             'returnCountWeight' => 0.0,
@@ -110,6 +116,8 @@ class CognitiveMetricsTest extends TestCase
             'ifCountWeight' => 0.0,
             'ifNestingLevelWeight' => 0.0,
             'elseCountWeight' => 0.0,
+            'loopCountWeight' => 0.0,
+            'nestingLevelWeight' => 0.0,
             'lineCountWeightDelta' => null,
             'argCountWeightDelta' => null,
             'returnCountWeightDelta' => null,
@@ -118,6 +126,8 @@ class CognitiveMetricsTest extends TestCase
             'ifCountWeightDelta' => null,
             'ifNestingLevelWeightDelta' => null,
             'elseCountWeightDelta' => null,
+            'loopCountWeightDelta' => null,
+            'nestingLevelWeightDelta' => null,
         ];
 
         $this->assertSame($expectedArray, $metrics->toArray());
@@ -140,6 +150,8 @@ class CognitiveMetricsTest extends TestCase
             'ifCount' => 4,
             'ifNestingLevel' => 2,
             'elseCount' => 1,
+            'loopCount' => 0,
+            'nestingLevel' => 1,
             'lineCountWeight' => 0.0,
             'argCountWeight' => 0.0,
             'returnCountWeight' => 0.0,
@@ -148,6 +160,8 @@ class CognitiveMetricsTest extends TestCase
             'ifCountWeight' => 0.0,
             'ifNestingLevelWeight' => 0.0,
             'elseCountWeight' => 0.0,
+            'loopCountWeight' => 0.0,
+            'nestingLevelWeight' => 0.0,
             'lineCountWeightDelta' => null,
             'argCountWeightDelta' => null,
             'returnCountWeightDelta' => null,
@@ -156,6 +170,8 @@ class CognitiveMetricsTest extends TestCase
             'ifCountWeightDelta' => null,
             'ifNestingLevelWeightDelta' => null,
             'elseCountWeightDelta' => null,
+            'loopCountWeightDelta' => null,
+            'nestingLevelWeightDelta' => null,
         ];
 
         $this->assertSame($expectedArray, $metrics->jsonSerialize());

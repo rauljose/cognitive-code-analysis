@@ -60,10 +60,18 @@ There are cases in which the code simply ends up with a lot of things that might
   - **Description**: The maximum depth of nested `if` statements within the method.
   - **Purpose**: Deeply nested `if` statements can be difficult to follow and may indicate a need for refactoring into smaller, more manageable pieces.
 
-- **Else Count**: 
+- **Else Count**:
   - **Description**: The total number of `else` statements within the method.
   - **Purpose**: Helps measure the complexity of branching logic. A high else count might indicate complex or tightly coupled conditional logic.
 
-- **If Count**: 
+- **If Count**:
   - **Description**: The total number of `if` statements within the method.
   - **Purpose**: Like else count, this measures the complexity of branching logic. A high if count can make code harder to understand and maintain.
+
+- **Loop Count**:
+  - **Description**: Total number of `for`, `foreach`, `while`, or `do` loops.
+  - **Purpose**: Provides an indication of how many iterations or repetitive structures exist in a method.
+
+- **Nesting Level**:
+  - **Description**: Tracks the deepest nesting level of loops, conditionals, switch/match statements and catch blocks.
+  - **Purpose**: Highly nested code is often harder to follow and understand.
